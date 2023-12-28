@@ -1,6 +1,4 @@
 package com.librarymanagementsystem.LibraryManagementSystem.controller;
-
-
 import com.librarymanagementsystem.LibraryManagementSystem.model.Book;
 import com.librarymanagementsystem.LibraryManagementSystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +30,6 @@ public class BookController {
     }
 
     @GetMapping("/getBookById/{id}")
-//    public Book getBookById(@PathVariable Long id) {
-//        return bookService.findById(id);
-//    }
-
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Book book = bookService.findById(id);
 

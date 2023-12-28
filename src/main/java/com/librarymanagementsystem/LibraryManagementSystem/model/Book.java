@@ -25,7 +25,9 @@ public class Book {
     private String author;
     @Column(name="borrowed")
     private boolean borrowed;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JoinColumn(name = "user_id")
     private User borrowedBy;
     @Column(name="borrowed_date" )
