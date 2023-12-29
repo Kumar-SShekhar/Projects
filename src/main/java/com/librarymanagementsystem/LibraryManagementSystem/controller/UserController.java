@@ -3,6 +3,7 @@ package com.librarymanagementsystem.LibraryManagementSystem.controller;
 import com.librarymanagementsystem.LibraryManagementSystem.model.User;
 import com.librarymanagementsystem.LibraryManagementSystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,22 @@ public class UserController {
     @GetMapping("/getUserByFirstLetter")
     public List<User> getUserByFirstLetter(@RequestParam(name = "name") char firstLetter){
         return userService.findUserByFirstLetter(firstLetter);
+    }
+
+    @GetMapping("/getAllUsersWithSorted/{field}")
+    public List<User> getUserWithSorted(@PathVariable String field){
+        return userService.findUserWithSorted(field);
+    }
+
+    @GetMapping("/getAllUsersWithPagination/{pageNumber}/{pageSize}")
+    public Page<User> getAllUsersWithPagination(@PathVariable Integer pageNumber, @PathVariable Integer pageSize)
+    {
+        return userService.findUsersWithPagination(pageNumber,pageSize);
+    }
+
+    @GetMapping("/getAllUsersWithPaginationAndSorting/{pageNumber}/{pageSize}/{field}")
+    public Page<User> getAllUsersWithPaginationAndSorting(@PathVariable Integer pageNumber, @PathVariable Integer pageSize , @PathVariable String field)
+    {
+        return userService.findUsersWithPaginationAndSorting(pageNumber,pageSize,field);
     }
 }

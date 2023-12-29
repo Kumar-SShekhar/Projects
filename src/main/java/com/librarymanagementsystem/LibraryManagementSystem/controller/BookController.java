@@ -1,7 +1,9 @@
 package com.librarymanagementsystem.LibraryManagementSystem.controller;
 import com.librarymanagementsystem.LibraryManagementSystem.model.Book;
 import com.librarymanagementsystem.LibraryManagementSystem.service.BookService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +94,23 @@ public class BookController {
     public ResponseEntity<List<Book>> getBookByStartingLetter(@RequestParam("title") char ch){
         List<Book> book = bookService.findBookByStartingLetter(ch);
         return ResponseEntity.ok(book);
+    }
+
+    @GetMapping("/getAllBooksWithSorted/{field}")
+    public List<Book> getAllBooksWithSorted(@PathVariable String field){
+        return bookService.findAllBooksWithSorted(field);
+    }
+
+    @GetMapping("/getAllBooksWithPagination/{pageNumber}/{pageSize}")
+    public Page<Book> getAllBooksWithPagination(@PathVariable Integer pageNumber, @PathVariable Integer pageSize)
+    {
+        return bookService.findAllBooksWithPagination(pageNumber,pageSize);
+    }
+
+    @GetMapping("/getAllBooksWithPaginationAndSorting/{pageNumber}/{pageSize}/{field}")
+    public Page<Book> getAllBooksWithPaginationAndSorting(@PathVariable Integer pageNumber, @PathVariable Integer pageSize, @PathVariable String field)
+    {
+        return bookService.findAllBooksWithPaginationAndSorting(pageNumber,pageSize,field);
     }
 }
 

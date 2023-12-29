@@ -18,7 +18,7 @@ public class User {
     @Id
     private Long userId;
 
-    @Column(name="user_name" , nullable = false)
+    @Column(name="user_name")
     private String name;
     @Column(name="date_of_birth")
     private String dateOfBirth;
